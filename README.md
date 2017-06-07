@@ -33,5 +33,5 @@ pythonReluNeuralNet.py:
 tensorStarter.py:
 	empty placeholder file - will use this if I start using Tensorflow instead of my own neural net (can use both CPU and GPU)
 
-__init__.py:
+"__init__.py" (quotes around filename in order to have it show the underscores in the name):
 	This file is required by Python's interpretor in order to allow importing Python scripts (typically have filenames ending in .py) from this folder into other Python scripts.  It would be empty, but Github has a requirement that files have content in order to be committed.  I added a single '.' to the file for this reason.
