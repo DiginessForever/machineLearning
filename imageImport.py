@@ -9,7 +9,7 @@ def removePreviouslyConvertedImages(imagePath):
 	myGlob = glob.glob(imagePath)
 	for delFile in myGlob:
 		os.remove(delFile)
-	throwAwayVar = raw_input("Check now...")
+	#throwAwayVar = raw_input("Check now...")
 
 def saveImage(imagePath, img):
 	img.save(imagePath)
@@ -70,13 +70,20 @@ def createBatch(myList, batchSize):
 	#strengthening effect.
 	#Also, convert from 0-255 to 0-1.
 	#totalImagesToGrab = int(len(flattenedList) * (percentToSelect / 100))
-	oneDimensionalBatch = numpy.empty([1])
+	oneDimensionalBatch = numpy.empty([1],dtype=float)
 
+	count = 0
 	while batchSize > 0:
 		indexToGrab = random.randrange(0, len(myList) - 1)
-		newValue = myList[indexToGrab]
-		newValue /= 255
-		numpy.concatenate(oneDimensionalBatch, newValue)
+		for pixelIndex in range(0, len(myList[indexToGrab]) -1):
+			#pixel = float(pixel)
+			pixel = myList[indexToGrab][pixelIndex] / 255.0
+			myList[indexToGrab][pixelIndex] = pixel
+
+		a = numpy.asarray(myList[indexToGrab][0:len(myList[indexToGrab])], dtype=float)
+		oneDimensionalBatch = numpy.concatenate([oneDimensionalBatch, a])
+		count += 1
+		print(str(count)+".oneDimensionalBatch size: " + str(oneDimensionalBatch.size))
 		batchSize -= 1
 
 	return oneDimensionalBatch
@@ -94,7 +101,7 @@ def main():
 	print("maxSize: " + str(maxSize))
 
 	myBatch = createBatch(myList, 50) 	#Get a batch of 50 pictures
-	print("batch length: " + str(len(myBatch)))
+	print("batch length: " + str(myBatch.size))
 
 if __name__ == "__main__":
 	main()
