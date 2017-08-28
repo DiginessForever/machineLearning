@@ -60,7 +60,7 @@ def getMaxSize(myList):
 			maxSize = image.size
 	return maxSize
 
-'''
+
 #I'm still getting the error:
 #TypeError: only integer scalar arrays can be converted to a scalar index
 #I must not understand numpy arrays (ndarrays) well enough yet.
@@ -70,7 +70,7 @@ def createBatch(myList, batchSize):
 	#strengthening effect.
 	#Also, convert from 0-255 to 0-1.
 	#totalImagesToGrab = int(len(flattenedList) * (percentToSelect / 100))
-	oneDimensionalBatch = []
+	oneDimensionalBatch = numpy.empty([1])
 
 	while batchSize > 0:
 		indexToGrab = random.randrange(0, len(myList) - 1)
@@ -80,7 +80,6 @@ def createBatch(myList, batchSize):
 		batchSize -= 1
 
 	return oneDimensionalBatch
-'''
 
 def main():
 	from sys import argv #This grabs any arguments passed through the command line
@@ -94,8 +93,8 @@ def main():
 	maxSize = getMaxSize(myList)
 	print("maxSize: " + str(maxSize))
 
-	#myBatch = createBatch(myList, 50) 	#Get a batch of 50 pictures
-	#print("batch length: " + str(len(myBatch)))
+	myBatch = createBatch(myList, 50) 	#Get a batch of 50 pictures
+	print("batch length: " + str(len(myBatch)))
 
 if __name__ == "__main__":
 	main()
