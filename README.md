@@ -2,10 +2,13 @@ Explanation of files:
 
 chromedriver.py:  
 	Description:  Python script which uses Selenium chromedriver to download images from Google images automatically.
+	
 	Usage:  "python chromedriver.py <search term here>" ie - "python chromedriver.py cat".
+	
 	What will happen:  It will open up an instance of the Chrome browser, automatically navigate to Google Images,
 		enter "cat", wait for images to pop up, scroll until it cannot anymore, then download all the images into the same
 			folder.
+			
 	Dependency:  Selenium's "chromedriver" binary - needs to be in the same folder as this python script.
 
 imageImport.py:
@@ -26,7 +29,9 @@ imageImport.py:
 pythonReluNeuralNet.py:
 	Description:  Work in progress.  I am converting my Javascript ANN to Python.  In the process, I am exploring using
 		Numpy matrices instead of double for loops, and using the Relu activation function instead of a sinusoidal one.
+		
 	Usage:  I cannot use this until I am finished.
+	
 	Action needed:  
 		Fully get the matrix multiplications working for the feed forward method
 		Refresh my memory on backpropagation
