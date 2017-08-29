@@ -1,7 +1,8 @@
 import os, urllib, time, sys, requests
+from PIL import Image
 from selenium import webdriver
 
-chromedriverpath = "/home/diginess/code/deeplearning/chromedriver"
+chromedriverpath = "/home/diginess/code/machineLearning/chromedriver"
 browser = webdriver.Chrome(chromedriverpath)
 
 #searchterm = "cat"
@@ -30,14 +31,35 @@ if not os.path.exists("./images/" + searchterm):
 count = 1
 for image in images:
     href = image.get_attribute('href')
+    '''
+    #This was the initial code I used, about 50 percent of the images were coming down
+    #completely corrupted / not able to be opened.  After switching to requests, it works.
     if '?imgurl=' in href:  # Do this because often times the last result will not be an actual image
         image_url_raw = href.split('?imgurl=')[1].split('&imgrefurl=')[0]
         image_url = urllib.unquote(urllib.unquote(image_url_raw))
         #image_url = requests.get(image_url_raw)
         #print image_url
         savePath = "./images/" + searchterm + "/" + "image" + str(count) + ".jpg"
-        urllib.urlretrieve(image_url, savePath)
-        count += 1
+        image_url = urllib.quote(image_url.encode('utf8'), ':/')
+        #urllib.urlretrieve(image_url, savePath)
+    '''
+    if '?imgurl=' in href:
+        image_url_raw = href.split('?imgurl=')[1].split('&imgrefurl=')[0]
+        image_url = urllib.unquote(urllib.unquote(image_url_raw))
+        print(image_url)
+
+        with open('./images/' + searchterm + "/" + "image" + str(count) + '.jpg', 'wb') as handle:
+            response = requests.get(image_url, stream=True)
+
+            if not response.ok:
+                print response
+
+            for block in response.iter_content(1024):
+                if not block:
+                    break
+                handle.write(block)
+
+    count += 1
 print count - 1
 
 #Note:  In order to call this program from
