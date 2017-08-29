@@ -2,23 +2,36 @@ Explanation of files:
 
 chromedriver.py:  
 	Description:  Python script which uses Selenium chromedriver to download images from Google images automatically.
+	
 	Usage:  "python chromedriver.py <search term here>" ie - "python chromedriver.py cat".
+	
 	What will happen:  It will open up an instance of the Chrome browser, automatically navigate to Google Images,
 		enter "cat", wait for images to pop up, scroll until it cannot anymore, then download all the images into the same
 			folder.
+			
 	Dependency:  Selenium's "chromedriver" binary - needs to be in the same folder as this python script.
 
-imageConvert.py:
-	Description:  A python script which is ran on a folder full of images and does all the processing on them necessary
-		to feed them into a neural net.  This is the same file as "import Image.py" except a few hours older.
-	Usage:  "python imageConvert.py" - make sure to have a folder full of images and that the folder is properly targeted
-		in the python script variable.
-	Action needed:  need to get max X or max Y and multiply the two to get the maxImage size.
+imageImport.py:
+	Description:  use command "python imageImport.py <relative folder path to images>" 
+	              example: "python imageImport.py images/car
+	
+	What it will do:  
+	1.  Go down from the folder the script is in, into the subfolder images, then subfolder car,
+	then it will load all the images that are readable (ignoring corrupted images or unrecognized formats) into a list.
+	2.  Convert the images into a standard height, with varying width to keep the aspect ratio, and save the
+	converted images into the same folder with names: "convertImageX.jpg" where X is the sequence number of the image.
+	3.  Save the converted version of the images in a list in memory with each image element of the list
+	converted into an ndarray of pixel values.
+	4.  Finally, it will create batches of images for input to the neural net, converting the pixel value ranges from
+	0-255 to 0-1.
+	
 
 pythonReluNeuralNet.py:
 	Description:  Work in progress.  I am converting my Javascript ANN to Python.  In the process, I am exploring using
 		Numpy matrices instead of double for loops, and using the Relu activation function instead of a sinusoidal one.
+		
 	Usage:  I cannot use this until I am finished.
+	
 	Action needed:  
 		Fully get the matrix multiplications working for the feed forward method
 		Refresh my memory on backpropagation
