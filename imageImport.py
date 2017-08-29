@@ -24,11 +24,19 @@ def resizeImage(imagePath, baseheight):
 		img = img.resize((wsize, baseheight), Image.ANTIALIAS)
 	except IOError:
 		pass
+	#print(type(img))
+	
 	return img #If it failed to open the image, this returns an empty
 
 def saveImage(newImagePath, img):
 		print("image path: " + newImagePath)
-		img.save(newImagePath)
+		try:
+			img.save(newImagePath)
+		except IOError:
+			try:
+				img.convert('RGB').save(newImagePath)
+			except IOError:
+				pass
 
 #https://infohost.nmt.edu/tcc/help/pubs/pil/image-constructors.html
 def getImages(imagePath):
