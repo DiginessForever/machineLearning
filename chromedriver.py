@@ -13,15 +13,32 @@ searchterm = sys.argv[1]
 url = "https://www.google.com/search?q=" + searchterm + "&safe=on&espv=2&biw=1599&bih=726&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiI56_7isXSAhXC4iYKHcbZCLEQAUIBigB#q=" + searchterm + "&safe=off&tbm=isch&tbs=sur:fc&*"
 
 browser.get(url)
+number_of_scrolls = 2
 
 #TO DO here:  Figure out how to time it or keep testing it so that the show more button is actually clicked.  
 #Maybe a time.wait(1) would work...
+'''
 for _ in range(30):
     browser.execute_script("window.scrollBy(0,10000)")
     time.sleep(.1)
     showmore = browser.find_elements_by_id('ksb_kvc')
     for button in showmore:
     	button.click()
+'''
+for i in range(number_of_scrolls):
+    for j in range(30):
+        browser.execute_script("window.scrollBy(0,10000)")
+        time.sleep(.2)
+    time.sleep(0.5)
+    #showmore = browser.find_elements_by_id('ksb_kvc')
+    #for button in showmore:
+    #   button.click()
+    try:
+        browser.find_element_by_xpath("//input[@value='Show more results']").click()
+    except Exception as e:
+        print("Less images found: " + str(e))
+        #print "Unexpected error:", sys.exc_info()[0]  #if the above doesn't work on python2
+        break
 
 images = browser.find_elements_by_class_name('rg_l')
 
