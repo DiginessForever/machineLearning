@@ -48,3 +48,13 @@ tensorStarter.py:
 
 init.py:
 	This file is required by Python's interpretor in order to allow importing Python scripts (typically have filenames ending in .py) from this folder into other Python scripts.  It would be empty, but Github has a requirement that files have content in order to be committed.  I added a single '.' to the file for this reason.
+	
+------------------------------------------
+Intent:
+The final product of this repo should be a tool usable with a single command:
+Once I get the training manager written, you should be able to give a command like this:  "python training_manager cat dog car wheel ..." (the ... represent a bunch of names of object types)
+It will automatically cycle through each object type, downloading all the images for each and saving them in folders.  Then it will run image import on each individually.  Then it will instantiate a neural net, train the net to recognize that object type, and save the weight matrix (trained memory of the neural net).
+
+At that point, I'll be pretty happy, but will still need to continue optimizing, as well as thinking about how to train for the image types together (I'll have to randomize the folder it pulls the image from, while appropriately setting the expected output layer according to the folder name the image came from).
+
+The next stage will be getting the training manager to monitor the recognition rate and try mitigating strategies when the network will not converge on specific classes.
