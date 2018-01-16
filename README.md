@@ -58,3 +58,5 @@ It will automatically cycle through each object type, downloading all the images
 At that point, I'll be pretty happy, but will still need to continue optimizing, as well as thinking about how to train for the image types together (I'll have to randomize the folder it pulls the image from, while appropriately setting the expected output layer according to the folder name the image came from).
 
 The next stage will be getting the training manager to monitor the recognition rate and try mitigating strategies when the network will not converge on specific classes.
+
+If you use this, let me know how it went and what you liked or didn't: diginess@gmail.com
